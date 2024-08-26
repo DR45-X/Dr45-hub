@@ -26,15 +26,20 @@
 
         .executor {
             margin: 50px auto;
+            position: relative;
+            display: inline-block;
         }
 
         .executor img {
             width: 300px;
             height: auto;
-            border: 4px solid transparent;
-            transition: transform 0.4s ease, border 0.4s ease;
+            transition: transform 0.4s ease;
             position: relative;
-            display: inline-block;
+            display: block;
+        }
+
+        .executor img:hover {
+            transform: scale(1.1);
         }
 
         .executor img::before {
@@ -49,30 +54,25 @@
             pointer-events: none;
             transition: border-color 0.4s ease;
             z-index: 1;
-        }
-
-        .executor img:hover {
-            transform: scale(1.1);
+            box-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white;
         }
 
         .executor img:hover::before {
-            border-color: #ffffff;
-            box-shadow: 0 0 20px white, 0 0 40px white, 0 0 60px #ff00ff;
-            animation: movingOutline 1.5s infinite;
+            animation: fireOutline 1s infinite;
         }
 
-        @keyframes movingOutline {
+        @keyframes fireOutline {
             0% {
-                border-color: #ffffff;
-                box-shadow: 0 0 20px white, 0 0 40px white, 0 0 60px #ff00ff;
+                border-color: rgba(255, 255, 255, 0.6);
+                box-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white;
             }
             50% {
-                border-color: #ff00ff;
-                box-shadow: 0 0 40px white, 0 0 80px white, 0 0 120px #ff00ff;
+                border-color: rgba(255, 255, 255, 0.8);
+                box-shadow: 0 0 15px white, 0 0 30px white, 0 0 40px white;
             }
             100% {
-                border-color: #ffffff;
-                box-shadow: 0 0 20px white, 0 0 40px white, 0 0 60px #ff00ff;
+                border-color: rgba(255, 255, 255, 0.6);
+                box-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white;
             }
         }
 
