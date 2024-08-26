@@ -28,7 +28,7 @@
             margin: 50px auto;
             position: relative;
             display: inline-block;
-            padding: 10px; /* Added padding for spacing */
+            padding: 10px; /* Space between images */
             box-sizing: border-box;
         }
 
@@ -44,6 +44,10 @@
             transform: scale(1.1);
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6), 0 0 45px rgba(255, 255, 255, 0.4);
             animation: fireOutline 1s infinite;
+        }
+
+        .executor img.solara:hover {
+            box-shadow: 0 0 15px rgba(128, 0, 128, 0.8), 0 0 30px rgba(128, 0, 128, 0.6), 0 0 45px rgba(128, 0, 128, 0.4);
         }
 
         @keyframes fireOutline {
@@ -62,16 +66,19 @@
             display: block;
             margin: 15px auto;
             padding: 10px 30px;
-            background-color: #4CAF50;
+            background-color: #6a1b9a; /* Aesthetic Purple Color */
             color: white;
             text-decoration: none;
             border-radius: 5px;
             font-size: 1.2rem;
-            transition: background-color 0.3s ease;
+            font-family: 'Orbitron', sans-serif;
+            transition: transform 0.3s ease, background-color 0.3s ease;
         }
 
         .download-btn:hover {
-            background-color: #45a049;
+            background-color: #8e24aa; /* Lighter Purple on Hover */
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
 
         .password {
@@ -86,7 +93,7 @@
     
     <div class="executor">
         <h2>Solara</h2>
-        <img src="Solara.png" alt="Solara Executor">
+        <img src="Solara.png" alt="Solara Executor" class="solara">
         <a href="https://www.mediafire.com/file/qty0inq5tjzhcqu/Solara.rar/file" class="download-btn">Download</a>
         <div class="password">PASSWORD: Solara</div>
     </div>
