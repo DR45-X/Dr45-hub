@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dr45's Hub</title>
     <style>
+        /* Fonts Import */
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400&display=swap');
-
+        
         body {
             background-color: #0f0f0f;
             color: white;
@@ -22,12 +23,6 @@
             margin-top: 50px;
             color: #fff;
             text-shadow: 0 0 10px #ffffff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
-            transition: transform 0.5s ease, text-shadow 0.5s ease;
-        }
-
-        h1:hover {
-            transform: scale(1.1);
-            text-shadow: 0 0 20px #ffffff, 0 0 40px #ff00ff, 0 0 60px #ff00ff;
         }
 
         .executor {
@@ -83,58 +78,6 @@
             font-size: 1.2rem;
         }
 
-        .info-btn {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 10px;
-            background-color: #4CAF50; /* Default button color */
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-family: 'Orbitron', sans-serif;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        .info-btn:hover {
-            background-color: #45a049;
-            transform: scale(1.1);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-        }
-
-        .solara-info-btn {
-            background-color: #6a1b9a; /* Purple color for Solara info button */
-        }
-
-        .solara-info-btn:hover {
-            background-color: #8e24aa;
-        }
-
-        .info-box {
-            display: none;
-            margin-top: 20px;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        .info-box img {
-            width: 200px;
-            height: auto;
-            margin-bottom: 20px;
-        }
-
-        .info-box p {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.1rem;
-            color: #ccc;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
         .patched-btn {
             display: block;
             margin: 15px auto;
@@ -153,7 +96,74 @@
             background-color: #8e24aa;
             transform: scale(1.1);
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-            cursor: not-allowed;
+        }
+
+        .info-btn {
+            background-color: #ff00ff;
+            color: white;
+            padding: 8px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            transition: background-color 0.3s ease;
+            margin: 10px;
+        }
+
+        .info-btn:hover {
+            background-color: #d500d5;
+        }
+
+        .solara-info-btn {
+            background-color: #6a1b9a;
+        }
+
+        .solara-info-btn:hover {
+            background-color: #8e24aa;
+        }
+
+        .info-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        .info-overlay img {
+            width: 400px;
+            margin-bottom: 20px;
+        }
+
+        .info-overlay p {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: #fff;
+            margin: 0 auto;
+            width: 80%;
+        }
+
+        .close-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff00ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            transition: background-color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background-color: #d500d5;
         }
     </style>
 </head>
@@ -166,10 +176,6 @@
         <a href="https://www.mediafire.com/file/qty0inq5tjzhcqu/Solara.rar/file" class="download-btn">Download</a>
         <div class="password">PASSWORD: Solara</div>
         <button class="info-btn solara-info-btn" onclick="showInfo('solara')">Info</button>
-        <div class="info-box" id="solara-info">
-            <img src="Solara.png" alt="Solara Image">
-            <p>Solara is a 63% UNC executor and Executes almost 70% of the loadstrings.</p>
-        </div>
     </div>
     
     <div class="executor">
@@ -178,20 +184,33 @@
         <a class="patched-btn">Patched!</a>
         <div class="password">PASSWORD: dr45ontop</div>
         <button class="info-btn" onclick="showInfo('nebula')">Info</button>
-        <div class="info-box" id="nebula-info">
-            <img src="Nebula.png" alt="Nebula Image">
-            <p>Nebula is a 71% UNC Executor made by Dr45 and it executes basically every Raw script.</p>
-        </div>
+    </div>
+    
+    <div id="info-overlay" class="info-overlay">
+        <img id="info-image" src="" alt="">
+        <p id="info-text"></p>
+        <button class="close-btn" onclick="closeInfo()">Close</button>
     </div>
 
     <script>
         function showInfo(executor) {
-            var infoBox = document.getElementById(executor + '-info');
-            if (infoBox.style.display === 'none' || infoBox.style.display === '') {
-                infoBox.style.display = 'block';
-            } else {
-                infoBox.style.display = 'none';
+            const overlay = document.getElementById('info-overlay');
+            const infoImage = document.getElementById('info-image');
+            const infoText = document.getElementById('info-text');
+
+            if (executor === 'solara') {
+                infoImage.src = 'Solara.png';
+                infoText.innerHTML = 'Solara is a 63% UNC executor and Executes almost 70% of the loadstrings';
+            } else if (executor === 'nebula') {
+                infoImage.src = 'Nebula.png';
+                infoText.innerHTML = 'Nebula is a 71% UNC Executor made by Dr45 and it executes basically every Raw script';
             }
+
+            overlay.style.display = 'block';
+        }
+
+        function closeInfo() {
+            document.getElementById('info-overlay').style.display = 'none';
         }
     </script>
 </body>
