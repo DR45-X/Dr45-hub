@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dr45's Hub</title>
     <style>
-        /* Fonts Import */
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400&display=swap');
-        
+
         body {
             background-color: #0f0f0f;
             color: white;
@@ -30,14 +30,12 @@
             position: relative;
             display: inline-block;
             padding: 10px;
-            box-sizing: border-box;
         }
 
         .executor img {
             width: 300px;
             height: auto;
             transition: transform 0.4s ease, box-shadow 0.4s ease;
-            position: relative;
             display: block;
         }
 
@@ -53,7 +51,7 @@
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6), 0 0 45px rgba(255, 255, 255, 0.4);
         }
 
-        .download-btn {
+        .download-btn, .info-btn {
             display: block;
             margin: 15px auto;
             padding: 10px 30px;
@@ -64,154 +62,104 @@
             font-size: 1.2rem;
             font-family: 'Orbitron', sans-serif;
             transition: transform 0.3s ease, background-color 0.3s ease;
-        }
-
-        .download-btn:hover {
-            background-color: #8e24aa;
-            transform: scale(1.1);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-        }
-
-        .password {
-            margin-top: 10px;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .patched-btn {
-            display: block;
-            margin: 15px auto;
-            padding: 10px 30px;
-            background-color: #6a1b9a;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 1.2rem;
-            font-family: 'Orbitron', sans-serif;
-            cursor: not-allowed;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-        }
-
-        .patched-btn:hover {
-            background-color: #8e24aa;
-            transform: scale(1.1);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-        }
-
-        .info-btn {
-            background-color: #ff00ff;
-            color: white;
-            padding: 8px 20px;
-            font-size: 1rem;
-            border: none;
-            border-radius: 5px;
             cursor: pointer;
-            font-family: 'Orbitron', sans-serif;
-            transition: background-color 0.3s ease;
-            margin: 10px;
         }
 
-        .info-btn:hover {
-            background-color: #d500d5;
+        .info-btn.nebula {
+            background-color: #ffffff;
+            color: black;
         }
 
-        .solara-info-btn {
-            background-color: #6a1b9a;
-        }
-
-        .solara-info-btn:hover {
+        .info-btn:hover, .download-btn:hover {
             background-color: #8e24aa;
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
 
-        .info-overlay {
-            display: none;
+        .overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            text-align: center;
-            padding-top: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease;
         }
 
-        .info-overlay img {
-            width: 400px;
+        .overlay img {
+            max-width: 500px;
+            height: auto;
             margin-bottom: 20px;
         }
 
-        .info-overlay p {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            color: #fff;
-            margin: 0 auto;
-            width: 80%;
-        }
-
-        .close-btn {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #ff00ff;
+        .overlay p {
             color: white;
-            border: none;
-            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
             font-size: 1.2rem;
-            cursor: pointer;
-            font-family: 'Orbitron', sans-serif;
-            transition: background-color 0.3s ease;
         }
 
-        .close-btn:hover {
-            background-color: #d500d5;
+        .fade-in {
+            opacity: 1;
+            visibility: visible;
         }
     </style>
 </head>
+
 <body>
     <h1>Welcome to Dr45's Hub</h1>
-    
+
     <div class="executor">
         <h2>Solara</h2>
         <img src="Solara.png" alt="Solara Executor" class="solara">
         <a href="https://www.mediafire.com/file/qty0inq5tjzhcqu/Solara.rar/file" class="download-btn">Download</a>
+        <button class="info-btn solara-info">Info</button>
         <div class="password">PASSWORD: Solara</div>
-        <button class="info-btn solara-info-btn" onclick="showInfo('solara')">Info</button>
     </div>
-    
+
     <div class="executor">
         <h2>Nebula</h2>
         <img src="Nebula.png" alt="Nebula Executor">
         <a class="patched-btn">Patched!</a>
+        <button class="info-btn nebula nebula-info">Info</button>
         <div class="password">PASSWORD: dr45ontop</div>
-        <button class="info-btn" onclick="showInfo('nebula')">Info</button>
     </div>
-    
-    <div id="info-overlay" class="info-overlay">
-        <img id="info-image" src="" alt="">
-        <p id="info-text"></p>
-        <button class="close-btn" onclick="closeInfo()">Close</button>
+
+    <div id="overlay-solara" class="overlay">
+        <div>
+            <img src="Solara.png" alt="Solara Executor">
+            <p>Solara is a 63% UNC executor and executes almost 70% of the loadstrings.</p>
+        </div>
+    </div>
+
+    <div id="overlay-nebula" class="overlay">
+        <div>
+            <img src="Nebula.png" alt="Nebula Executor">
+            <p>Nebula is a 71% UNC Executor made by Dr45 and it executes basically every Raw script.</p>
+        </div>
     </div>
 
     <script>
-        function showInfo(executor) {
-            const overlay = document.getElementById('info-overlay');
-            const infoImage = document.getElementById('info-image');
-            const infoText = document.getElementById('info-text');
+        document.querySelector('.solara-info').addEventListener('click', function() {
+            document.getElementById('overlay-solara').classList.add('fade-in');
+        });
 
-            if (executor === 'solara') {
-                infoImage.src = 'Solara.png';
-                infoText.innerHTML = 'Solara is a 63% UNC executor and Executes almost 70% of the loadstrings';
-            } else if (executor === 'nebula') {
-                infoImage.src = 'Nebula.png';
-                infoText.innerHTML = 'Nebula is a 71% UNC Executor made by Dr45 and it executes basically every Raw script';
-            }
+        document.querySelector('.nebula-info').addEventListener('click', function() {
+            document.getElementById('overlay-nebula').classList.add('fade-in');
+        });
 
-            overlay.style.display = 'block';
-        }
+        document.getElementById('overlay-solara').addEventListener('click', function() {
+            this.classList.remove('fade-in');
+        });
 
-        function closeInfo() {
-            document.getElementById('info-overlay').style.display = 'none';
-        }
+        document.getElementById('overlay-nebula').addEventListener('click', function() {
+            this.classList.remove('fade-in');
+        });
     </script>
 </body>
+
 </html>
