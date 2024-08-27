@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dr45's Hub</title>
+    <!-- Importing a new cool aesthetic font -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Raleway:wght@800&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400&display=swap');
-        
         body {
             background-color: #0f0f0f;
             color: white;
@@ -17,85 +17,76 @@
         }
 
         h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
+            font-family: 'Raleway', sans-serif;
+            font-size: 4rem;
             margin-top: 50px;
-            color: #fff;
-            text-shadow: 0 0 10px #ffffff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+            color: #ffffff;
+            text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+            position: relative;
+            transition: transform 0.5s ease, color 0.5s ease;
         }
 
+        h1:hover {
+            transform: scale(1.1);
+            color: #ff00ff;
+            text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff, 0 0 60px #ffffff;
+        }
+
+        /* Adding animation effect */
+        @keyframes neon-glow {
+            0% {
+                text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff;
+            }
+            50% {
+                text-shadow: 0 0 20px #ffffff, 0 0 40px #ffffff, 0 0 60px #ff00ff;
+            }
+            100% {
+                text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff;
+            }
+        }
+
+        h1:hover {
+            animation: neon-glow 1.5s infinite alternate;
+        }
+        
         .executor {
             margin: 50px auto;
-            position: relative;
-            display: inline-block;
-            padding: 10px; /* Space between images */
-            box-sizing: border-box;
         }
 
         .executor img {
             width: 300px;
             height: auto;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            position: relative;
-            display: block;
+            border: 4px solid transparent;
+            transition: border 0.4s ease, box-shadow 0.4s ease;
         }
 
         .executor img:hover {
-            transform: scale(1.1);
-        }
-
-        .executor img.solara:hover {
-            box-shadow: 0 0 15px rgba(128, 0, 128, 0.8), 0 0 30px rgba(128, 0, 128, 0.6), 0 0 45px rgba(128, 0, 128, 0.4);
-        }
-
-        .executor img:not(.solara):hover {
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6), 0 0 45px rgba(255, 255, 255, 0.4);
+            border-color: #ffffff;
+            box-shadow: 0 0 20px white, 0 0 40px white, 0 0 60px #ff00ff;
         }
 
         .download-btn {
             display: block;
             margin: 15px auto;
             padding: 10px 30px;
-            background-color: #6a1b9a; /* Aesthetic Purple Color */
+            background-color: #4CAF50;
             color: white;
             text-decoration: none;
             border-radius: 5px;
             font-size: 1.2rem;
             font-family: 'Orbitron', sans-serif;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         .download-btn:hover {
-            background-color: #8e24aa; /* Lighter Purple on Hover */
+            background-color: #45a049;
             transform: scale(1.1);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
 
         .password {
             margin-top: 10px;
             font-weight: bold;
             font-size: 1.2rem;
-        }
-
-        .patched-btn {
-            display: block;
-            margin: 15px auto;
-            padding: 10px 30px;
-            background-color: #6a1b9a; /* Aesthetic Purple Color */
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 1.2rem;
-            font-family: 'Orbitron', sans-serif;
-            cursor: not-allowed; /* Shows as not clickable */
-            transition: transform 0.3s ease, background-color 0.3s ease;
-        }
-
-        .patched-btn:hover {
-            background-color: #8e24aa; /* Lighter Purple on Hover */
-            transform: scale(1.1);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-            cursor: not-allowed; /* Shows as not clickable */
         }
     </style>
 </head>
@@ -104,7 +95,7 @@
     
     <div class="executor">
         <h2>Solara</h2>
-        <img src="Solara.png" alt="Solara Executor" class="solara">
+        <img src="Solara.png" alt="Solara Executor">
         <a href="https://www.mediafire.com/file/qty0inq5tjzhcqu/Solara.rar/file" class="download-btn">Download</a>
         <div class="password">PASSWORD: Solara</div>
     </div>
@@ -112,7 +103,7 @@
     <div class="executor">
         <h2>Nebula</h2>
         <img src="Nebula.png" alt="Nebula Executor">
-        <a class="patched-btn">Patched!</a>
+        <a href="#" class="download-btn">Patched!</a>
         <div class="password">PASSWORD: dr45ontop</div>
     </div>
 </body>
