@@ -21,8 +21,13 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 3rem;
             margin-top: 50px;
-            color: #fff;
-            text-shadow: 0 0 10px #ffffff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+            color: #bb86fc;
+            text-shadow: 0 0 10px #ffffff, 0 0 20px #bb86fc, 0 0 30px #bb86fc;
+            transition: transform 0.3s ease;
+        }
+
+        h1:hover {
+            transform: scale(1.1);
         }
 
         .executor {
@@ -30,12 +35,14 @@
             position: relative;
             display: inline-block;
             padding: 10px;
+            box-sizing: border-box;
         }
 
         .executor img {
             width: 300px;
             height: auto;
             transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
             display: block;
         }
 
@@ -51,7 +58,7 @@
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6), 0 0 45px rgba(255, 255, 255, 0.4);
         }
 
-        .download-btn, .info-btn {
+        .download-btn {
             display: block;
             margin: 15px auto;
             padding: 10px 30px;
@@ -62,51 +69,120 @@
             font-size: 1.2rem;
             font-family: 'Orbitron', sans-serif;
             transition: transform 0.3s ease, background-color 0.3s ease;
-            cursor: pointer;
         }
 
-        .info-btn.nebula {
-            background-color: #ffffff;
-            color: black;
-        }
-
-        .info-btn:hover, .download-btn:hover {
+        .download-btn:hover {
             background-color: #8e24aa;
             transform: scale(1.1);
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
 
-        .overlay {
+        .password {
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .patched-btn {
+            display: block;
+            margin: 15px auto;
+            padding: 10px 30px;
+            background-color: #ffffff;
+            color: #000000;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            font-family: 'Orbitron', sans-serif;
+            cursor: not-allowed;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .patched-btn:hover {
+            background-color: #e0e0e0;
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            cursor: not-allowed;
+        }
+
+        .info-btn {
+            display: block;
+            margin: 10px auto;
+            padding: 8px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            font-family: 'Orbitron', sans-serif;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .info-btn.nebula {
+            background-color: white;
+            color: #000;
+        }
+
+        .info-btn.solara {
+            background-color: #6a1b9a;
+            color: #fff;
+        }
+
+        .info-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .info-overlay {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.9);
-            display: flex;
+            z-index: 999;
             justify-content: center;
             align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.4s ease;
+            text-align: center;
         }
 
-        .overlay img {
-            max-width: 500px;
+        .info-content {
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
+        .info-content img {
+            width: 400px;
             height: auto;
             margin-bottom: 20px;
         }
 
-        .overlay p {
-            color: white;
-            font-family: 'Poppins', sans-serif;
+        .close-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 30px;
+            border-radius: 5px;
             font-size: 1.2rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-        .fade-in {
-            opacity: 1;
-            visibility: visible;
+        .close-btn.solara {
+            background-color: #6a1b9a;
+            color: #fff;
         }
+
+        .close-btn.nebula {
+            background-color: #fff;
+            color: #000;
+        }
+
+        .close-btn:hover {
+            background-color: #8e24aa;
+            transform: scale(1.05);
+        }
+
     </style>
 </head>
 
@@ -117,7 +193,7 @@
         <h2>Solara</h2>
         <img src="Solara.png" alt="Solara Executor" class="solara">
         <a href="https://www.mediafire.com/file/qty0inq5tjzhcqu/Solara.rar/file" class="download-btn">Download</a>
-        <button class="info-btn solara-info">Info</button>
+        <a class="info-btn solara" onclick="showInfo('solara')">Info</a>
         <div class="password">PASSWORD: Solara</div>
     </div>
 
@@ -125,40 +201,34 @@
         <h2>Nebula</h2>
         <img src="Nebula.png" alt="Nebula Executor">
         <a class="patched-btn">Patched!</a>
-        <button class="info-btn nebula nebula-info">Info</button>
+        <a class="info-btn nebula" onclick="showInfo('nebula')">Info</a>
         <div class="password">PASSWORD: dr45ontop</div>
     </div>
 
-    <div id="overlay-solara" class="overlay">
+    <div id="solara-info" class="info-overlay">
         <div>
             <img src="Solara.png" alt="Solara Executor">
-            <p>Solara is a 63% UNC executor and executes almost 70% of the loadstrings.</p>
+            <div class="info-content">Solara is a 63% UNC executor and Executes almost 70% of the loadstrings.</div>
+            <a class="close-btn solara" onclick="closeInfo('solara')">Close</a>
         </div>
     </div>
 
-    <div id="overlay-nebula" class="overlay">
+    <div id="nebula-info" class="info-overlay">
         <div>
             <img src="Nebula.png" alt="Nebula Executor">
-            <p>Nebula is a 71% UNC Executor made by Dr45 and it executes basically every Raw script.</p>
+            <div class="info-content">Nebula is a 71% UNC Executor made by Dr45 and it executes basically every Raw script.</div>
+            <a class="close-btn nebula" onclick="closeInfo('nebula')">Close</a>
         </div>
     </div>
 
     <script>
-        document.querySelector('.solara-info').addEventListener('click', function() {
-            document.getElementById('overlay-solara').classList.add('fade-in');
-        });
+        function showInfo(executor) {
+            document.getElementById(executor + '-info').style.display = 'flex';
+        }
 
-        document.querySelector('.nebula-info').addEventListener('click', function() {
-            document.getElementById('overlay-nebula').classList.add('fade-in');
-        });
-
-        document.getElementById('overlay-solara').addEventListener('click', function() {
-            this.classList.remove('fade-in');
-        });
-
-        document.getElementById('overlay-nebula').addEventListener('click', function() {
-            this.classList.remove('fade-in');
-        });
+        function closeInfo(executor) {
+            document.getElementById(executor + '-info').style.display = 'none';
+        }
     </script>
 </body>
 
